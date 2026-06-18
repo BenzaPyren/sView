@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=sView
+Comment=Minimal & Fast Image Viewer
+Exec=sview %F
+Icon=image-viewer
+Terminal=false
+Type=Application
+Categories=Graphics;2DGraphics;RasterGraphics;Viewer;
+MimeType=image/bmp;image/gif;image/jpeg;image/jpg;image/png;image/tiff;image/webp;image/x-ms-bmp;image/x-portable-anymap;image/x-portable-bitmap;image/x-portable-graymap;image/x-portable-pixmap;image/x-xbitmap;image/x-xpixmap;
