@@ -2,6 +2,7 @@
 
 import sys
 import os
+import re
 import datetime
 import configparser
 from PyQt6.QtWidgets import QApplication, QMainWindow, QLabel, QScrollArea, QStatusBar, QComboBox, QHBoxLayout, QWidget, QPushButton, QDialog, QVBoxLayout, QCheckBox
@@ -15,6 +16,10 @@ from PyQt6.QtCore import Qt, QPoint, QTimer, QEvent, QSize
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
+
+def natural_sort_key(s):
+    """Zerlegt den String in Text und Zahlen, um eine natürliche Sortierung zu ermöglichen."""
+    return [int(text) if text.isdigit() else text.lower() for text in re.split(r'(\d+)', s)]
 
 class SimpleImageViewer(QMainWindow):
     def __init__(self, start_path=None):
@@ -248,9 +253,13 @@ class SimpleImageViewer(QMainWindow):
         elif sort_mode == "Size":
             files.sort(key=os.path.getsize, reverse=is_descending)
         elif sort_mode == "Type":
-            files.sort(key=lambda x: (os.path.splitext(x)[1].lower(), os.path.basename(x).lower()), reverse=is_descending)
+            # Typ (Dateiendung) primär, danach natürliche Sortierung für den Dateinamen
+            files.sort(key=lambda x: (os.path.splitext(x)[1].lower(), natural_sort_key(os.path.basename(x))), reverse=is_descending)
+        elif sort_mode == "Name":
+            # Sortiert natürlich nach Dateinamen (bild2.png vor bild10.png)
+            files.sort(key=lambda x: natural_sort_key(os.path.basename(x)), reverse=is_descending)
         else:
-            files.sort(reverse=is_descending)
+            files.sort(key=lambda x: natural_sort_key(os.path.basename(x)), reverse=is_descending)
 
         self.image_paths = files
 
@@ -477,19 +486,25 @@ class SimpleImageViewer(QMainWindow):
         if not self.image_paths:
             return
 
+        # y > 0 = Nach OBEN scrollen (vorheriges Bild / Index - 1)
+        # y < 0 = Nach UNTEN scrollen (nächstes Bild / Index + 1)
+        # Tausche hier einfach das > und < Zeichen, falls sich die Richtung
+        # auf deinem System weiterhin falsch anfühlt.
+
         if event.angleDelta().y() < 0:
-            if self.current_index < len(self.image_paths) - 1:
-                self.current_index += 1
-            elif self.check_loop.isChecked():
-                self.current_index = 0
-            else:
-                return
-            self.show_image()
-        elif event.angleDelta().y() > 0:
             if self.current_index > 0:
                 self.current_index -= 1
             elif self.check_loop.isChecked():
                 self.current_index = len(self.image_paths) - 1
+            else:
+                return
+            self.show_image()
+
+        elif event.angleDelta().y() > 0:
+            if self.current_index < len(self.image_paths) - 1:
+                self.current_index += 1
+            elif self.check_loop.isChecked():
+                self.current_index = 0
             else:
                 return
             self.show_image()
