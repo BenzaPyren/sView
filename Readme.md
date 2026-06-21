@@ -4,7 +4,7 @@ A basic image viewer written in Python and PyQt6. It focuses on core functionali
 
 ## Features
 
-* **Small footprint:** The standalone script is approximately 23 KB in size.
+* **Small footprint:** The standalone script is approximately 25 KB in size.
 * **Auto-resize:** Images larger than the window are automatically scaled to fit upon opening.
 * **Panning:** Left-click (pressed) + Mouse Movement pans the (zoomed in) picture.
 * **Quick resize:** Left double-click toggles between original size and a 'fit to window'-size.
