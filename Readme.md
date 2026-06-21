@@ -18,6 +18,20 @@ A basic image viewer written in Python and PyQt6. It focuses on core functionali
 * **Animated image support:** Basic support for viewing and zooming animated formats like GIF and WebP.
 * **Sort Style / Order:** Change to your liking in the two menus bottom-right. sView saves your preferences in the sView.ini.
 
+## Screenshots
+
+See below for a preview of the viewer in action, demonstrating its core functionality:
+
+| Standard View | Scaled Image |
+| :--- | :--- |
+| ![Standard View](assets/ss1.png) | ![Scaled Image](assets/ss2.png) |
+| *Standard view of an image* | *Image display scaled down* |
+
+| Rotated Image | Help Overlay |
+| :--- | :--- |
+| ![Rotated Image](assets/ss3.png) | ![Help Overlay](assets/ss4.png) |
+| *Image displayed in rotated state* | *Viewing the integrated help text* |
+
 ## Dependencies
 
 sView relies on your system's native libraries. You will need Python 3 and PyQt6.
