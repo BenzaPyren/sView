@@ -1,6 +1,6 @@
 # sView - Minimal Image Viewer
 
-A basic image viewer written in Python and PyQt6. It focuses on core functionality: viewing images and applying simple transformations using the Ctrl-/Alt-/Shift-key and the mouse wheel. No overlay-buttons hiding parts of the picture, no deep menus, no extra features inflating code and tool. sView is a very slim, very fast tool with what I consider to be the minimum (and maximum) features necessary for an image viewer. sView works in read-only mode - except for the sView.ini (to save your preferred sort style and order) the tool can't write any files. Transformations (like rotating or flipping the image) are NOT permanent.
+A basic image viewer written in Python and PyQt6. It focuses on core functionality: viewing images and applying simple transformations using the Ctrl-/Alt-/Shift-key and the mouse wheel. No overlay-buttons hiding parts of the picture, no deep menus, no extra features inflating code and tool. sView is a very slim, very fast tool with what I consider to be the minimum (and maximum) features necessary for an image viewer. It supports common formats as well as animated formats (.gif, .webp). sView works in read-only mode - except for the sView.ini (to save your preferred sort style and order) the tool can't write any files. Transformations (like rotating or flipping the image) are NOT permanent.
 
 ## Features
 
