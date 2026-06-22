@@ -486,25 +486,21 @@ class SimpleImageViewer(QMainWindow):
         if not self.image_paths:
             return
 
-        # y > 0 = Nach OBEN scrollen (vorheriges Bild / Index - 1)
-        # y < 0 = Nach UNTEN scrollen (nächstes Bild / Index + 1)
-        # Tausche hier einfach das > und < Zeichen, falls sich die Richtung
-        # auf deinem System weiterhin falsch anfühlt.
-
-        if event.angleDelta().y() < 0:
-            if self.current_index > 0:
-                self.current_index -= 1
-            elif self.check_loop.isChecked():
-                self.current_index = len(self.image_paths) - 1
-            else:
-                return
-            self.show_image()
-
-        elif event.angleDelta().y() > 0:
+        # Navigation
+        if event.angleDelta().y() < 0:  # Scroll down (next image)
             if self.current_index < len(self.image_paths) - 1:
                 self.current_index += 1
             elif self.check_loop.isChecked():
                 self.current_index = 0
+            else:
+                return
+            self.show_image()
+
+        elif event.angleDelta().y() > 0:  # Scroll up (previous image)
+            if self.current_index > 0:
+                self.current_index -= 1
+            elif self.check_loop.isChecked():
+                self.current_index = len(self.image_paths) - 1
             else:
                 return
             self.show_image()
